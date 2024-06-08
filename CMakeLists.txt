@@ -3,7 +3,7 @@ project(RedeSocial)
 
 # Add your source files here
 set(SOURCES
-    src/RedeSocial/RedeSocial.cpp
+  ${PROJECT_SOURCE_DIR}/RedeSocial/RedeSocial.cpp
 )
 
 # Add any additional include directories here
