@@ -1,12 +1,27 @@
 ﻿// RedeSocial.cpp : Defines the entry point for the application.
 //
 
-#include "RedeSocial.h"
+#include "RedeSocial.hpp"
+#include "Conta.hpp"
+#include "Post.hpp"
+#include "Comentario.hpp"
+#include <map>
 
-using namespace std;
+void PrintContas(std::map <long, Conta*>* Contas) {
+
+	for (auto it = (*Contas).begin(); it != (*Contas).end(); ++it) {
+		std::cout << "Key: " << it->first << ", Value: " << (*(it->second)).nome << std::endl;
+	}
+
+}
 
 int main()
 {
-	cout << "Hello CMake." << endl;
+	std::map <long, Conta*> Contas;
+
+	Conta SysAdm = Conta("SysAdm", &Contas);
+
+	PrintContas(&Contas);
+
 	return 0;
 }
