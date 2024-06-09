@@ -26,7 +26,7 @@ add_executable(MyExecutable ${SOURCES})
 
 # Link the required libraries
 target_link_libraries(MyExecutable
-    streamio
+    iostream
     string
     map
 )
