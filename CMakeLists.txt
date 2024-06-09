@@ -2,9 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 project(RedeSocial)
 
 # Add your source files here
-set(SOURCES
-  ${PROJECT_SOURCE_DIR}/RedeSocial/RedeSocial.cpp
-)
+file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/RedeSocial/*.cpp")
 
 # Set the C++ standard to use
 set(CMAKE_CXX_STANDARD 17)
