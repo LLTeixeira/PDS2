@@ -1,8 +1,6 @@
 #pragma once
 #include <map>
-#include <iostream>
 #include "Post.hpp"
-#include <vector>
 
 class Conta {
 public:
