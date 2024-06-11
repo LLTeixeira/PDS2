@@ -17,13 +17,13 @@ Post* FindPost(long dono, long id, std::map <long, Conta*>& Contas) {
 	Conta* pConta;
 	auto it = Contas.find(dono); 
 	if (it == Contas.end()) {
-		std::cout << "Account not found\n";
+		std::cout << "Account not found" << std::endl;
 		return nullptr;
 	}
 	else {
 		pConta = Contas[dono];
 		if ((*pConta).Mural.size() < id) {
-			std::cout << "Post not found\n";
+			std::cout << "Post not found" << std::endl;
 			return nullptr;
 		}
 		else {

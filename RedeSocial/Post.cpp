@@ -13,7 +13,7 @@ float Post::GetScore() {
 		return soma / avaliacoes.size();
 	}
 	else {
-		std::cout << "No score";
+		std::cout << "No score" << std::endl;
 		return 0.0;
 	}
 }
