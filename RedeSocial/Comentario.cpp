@@ -1,6 +1,6 @@
 #include "Comentario.hpp"
 
 Comentario::Comentario(long d, std::string cont){
-	dono = d;
+	dono_id = d;
 	conteudo = cont;
 }

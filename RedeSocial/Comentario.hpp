@@ -4,7 +4,7 @@
 class Comentario
 {
 public:
-	long dono;
+	Comentario(long dono_id, std::string conteudo);
+	long dono_id;
 	std::string conteudo;
-	Comentario(long dono, std::string conteudo);
 };
