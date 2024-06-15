@@ -10,6 +10,7 @@ class Conta {
 		std::vector<Post> Mural;
 		std::vector<Conta> seguidores;
 		std::vector<Conta> seguindo;
+		std::vector<Post*> posts_notificacoes;
 		void CriarPost(std::string cont);
 		void AvaliarPost(float av, Post& target);
 		void Comentar(std::string com, Post& p);

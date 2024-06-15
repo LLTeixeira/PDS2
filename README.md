@@ -1,7 +1,7 @@
 Rede Social para eventos permite que usuários:
-- Criem eventos
-- Compartilhem eventos
-- Participem de eventos
+- Criem posts
+- Compartilhem posts
+- Comentar de posts
 
 Recursos:
 - Inscrição
@@ -17,20 +17,21 @@ Painel Inicial:
 [2] Entrar na conta
 
 
-=> Se [1]: Cria conta e volta para o 1°);
+=> Se [1]: Cria conta e volta para o Painel Inicial;
 
 => Se [2] Entrar em conta:
 	- Checar se conta existe. Caso não, alertar e voltar ao fluxo inicial;
 	- Printar id_conta, num_seguindo, num_seguidores;
-	- Caso tenha seguidores que poste algo, mostrar os 3 posts com maior score de avaliação, senão, partir pro próximo passo;
+	- Caso siga pessoas que poste algo, mostrar os 3 posts com maior score de avaliação, senão, partir pro próximo passo;
 		-> Ordenar pelos posts com maior rank dos seguidores, e, em seguida, dos com maiores ranks da rede social
-		-> Caso não tenha posts dos seguidores (ex. a 1° conta), mostrar os posts com maior rank no geral.
+		-> Caso não tenha posts de pessoas seguindo (ex. a 1° conta), mostrar os posts com maior rank no geral.
 	- printar Painel Central
 	
 	Painel Central:
 	[0] Voltar (Retornar ao Painel Inicial)
-	[1] Ver mais post (qtd_posts) 
-		-> Ordenar pelos posts com maior rank dos seguidores, e, em seguida, dos com maiores ranks da rede social
+	[1] Ver mais post {qtd_posts}
+		-> Ordenar pelos posts mais recentes (primeiro de quem segue, depois dos ranks gerais)
+			# Caso n siga a ideia acima: Ordenar pelos posts com maior rank de seguindo, e, em seguida, dos com maiores ranks da rede social
 		-> Exibir "Painel Central" no final
 	[2] Criar um post
 		-> Escrever uma mensagem 
