@@ -3,12 +3,12 @@
 #include "Comentario.hpp"
 
 class Post {
-public:
-	std::string content;
-	long id;
-	std::vector<float> avaliacoes;
-	long dono;
-	std::vector<Comentario> comentarios;
-	Post(std::string cont, long poster);
-	float GetScore();
+	public:
+		Post(std::string cont, long poster);
+		long id;
+		long dono_id;
+		std::string content;
+		std::vector<float> avaliacoes;
+		std::vector<Comentario> comentarios;
+		float GetScore();
 };

@@ -4,7 +4,7 @@
 
 Post::Post(std::string cont, long poster) {
 	content = cont;
-	dono = poster;
+	dono_id = poster;
 }
 
 float Post::GetScore() {
