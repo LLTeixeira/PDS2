@@ -4,7 +4,7 @@
 
 class Post {
 	public:
-		Post(std::string cont, long poster);
+		Post(std::string cont, long id_poster);
 		long id;
 		long dono_id;
 		std::string content;

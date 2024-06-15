@@ -2,9 +2,9 @@
 #include <numeric>
 #include <iostream>
 
-Post::Post(std::string cont, long poster) {
+Post::Post(std::string cont, long id_poster) {
 	content = cont;
-	dono_id = poster;
+	dono_id = id_poster;
 }
 
 float Post::GetScore() {
