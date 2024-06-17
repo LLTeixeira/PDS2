@@ -1,11 +1,18 @@
 #include "Painel.hpp"
-#include "RedeSocial.hpp"
 #include <iostream>
+#include <stack>
 
-void PainelInicial::exibir(RedeSocial& rede_social) {
+void  Painel::exibir(RedeSocial* rede_social, std::stack<Painel>& PilhaPainel) {
+    std::cout << "Redirecionado para Painel Inicial" << std::endl;
+    std::getchar();
+    PilhaPainel.push(PainelInicial());
+}
+
+void PainelInicial::exibir(RedeSocial* rede_social, std::stack<Painel>& PilhaPainel) {
         int escolha;
         std::string nome;
         Conta* conta;
+
         std::cout << "Painel Inicial:" << std::endl;
         std::cout << "[0] Sair" << std::endl;
         std::cout << "[1] Criar conta"  << std::endl;
@@ -14,17 +21,18 @@ void PainelInicial::exibir(RedeSocial& rede_social) {
 
         switch (escolha) {
             case 0:
-                rede_social.VoltarPainel();
+                break;
             case 1:
                 std::cout << "Digite o nome que deseja usar: " << std::endl;
                 std::cin >> nome;
-                rede_social.CriarConta(nome);
+                rede_social->CriarConta(nome);
+                PilhaPainel.push(PainelInicial());
                 break;
             case 2:
                 std::cout << "Digite o nome do usuário: " << std::endl;
                 std::cin >> nome;
-                conta = rede_social.GetConta(nome);
-                rede_social.AcessaConta(conta);
+                conta = rede_social->GetConta(nome);
+                PilhaPainel.push(PainelPrincipal(conta));
                 break;
             default:
                 std::cout << "Escolha inválida!" << std::endl;
@@ -36,7 +44,7 @@ PainelPrincipal::PainelPrincipal(Conta* conta) {
     this->conta = conta;
 }
 
-void PainelPrincipal::exibir(RedeSocial& rede_social) {
+void PainelPrincipal::exibir(RedeSocial* rede_social, std::stack<Painel>& PilhaPainel) {
         int escolha;
         std::cout << "Painel Principal:" << std::endl;
         std::cout << "[0] Sair" << std::endl;
@@ -44,7 +52,7 @@ void PainelPrincipal::exibir(RedeSocial& rede_social) {
 
         switch (escolha) {
             case 0:
-                rede_social.VoltarPainel();
+                break;
             default:
                 std::cout << "Escolha inválida!" << std::endl;
                 break;

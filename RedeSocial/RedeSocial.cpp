@@ -1,15 +1,6 @@
 ﻿#include "RedeSocial.hpp"
 #include <iostream>
 
-RedeSocial::RedeSocial() {
-	PainelInicial painel_inicial;
-	this->PainelAtual = painel_inicial;
-}
-
-void RedeSocial::AcessaConta(Conta* conta) {
-	this->TrocarPainel(PainelPrincipal(conta));
-};
-
 void RedeSocial::CriarConta(std::string nome_str) {
 	Conta* conta_ = new Conta(nome_str, Contas);
 }
@@ -60,27 +51,3 @@ Post* RedeSocial::FindPost(long dono_id, long id_post) {
 		}
 	}
 }		
-
-void RedeSocial::VoltarPainel() {
-	if (this->PilhaPaineis.empty()) {
-		std::cout << "Saindo.." << std::endl;
-		exit(0);
-	}
-
-	this->PainelAtual = this->PilhaPaineis.top();
-	this->PilhaPaineis.pop();
-}
-
-void RedeSocial::TrocarPainel(Painel proximo_painel) {
-	this->PilhaPaineis.push(this->PainelAtual);
-	this->PainelAtual = proximo_painel;
-}
-
-void RedeSocial::ExibirPainelAtual() {
-	this->PainelAtual.exibir(*this);
-	this->ExibirPainelAtual();
-};
-
-void RedeSocial::Inicializa() {
-	this->ExibirPainelAtual();
-};
