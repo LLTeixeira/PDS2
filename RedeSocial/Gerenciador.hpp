@@ -6,13 +6,15 @@
 
 class Gerenciador {
 	private:
-		std::stack<Painel> PilhaPaineis;
-		Painel PainelAtual;
+		std::stack<Painel*> PilhaPaineis;
 		RedeSocial* rede_social;
+		PainelInicial pi;
+		PainelPrincipal pp;
 
 	public:
-		Gerenciador(std::stack<Painel> PilhaPaineis, RedeSocial* rede_social);
-		void ConsumirPainel();
+		Gerenciador(RedeSocial* rede_social);
+		void UsarPilha();
+		void IntepretaIndicador(Painel* painel);
 		void Iniciar();
 
 };

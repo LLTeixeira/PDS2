@@ -2,19 +2,15 @@
 #include "Painel.hpp"
 #include "Gerenciador.hpp"
 #include <iostream>
+#include <vector>
 
 int main()
 {
-	RedeSocial rede_social;
+	RedeSocial rede_social = RedeSocial();
 
 	rede_social.CriarConta("Admin");
 
-	std::stack<Painel> PilhaPainel;
-	PilhaPainel.push(PainelInicial());
-
-	std::cout << PilhaPainel.empty() << std::endl;
-
-	Gerenciador gerenciador = Gerenciador(PilhaPainel, &rede_social);
+	Gerenciador gerenciador = Gerenciador(&rede_social);
 
 	gerenciador.Iniciar();
 

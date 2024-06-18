@@ -1,6 +1,14 @@
 ﻿#include "RedeSocial.hpp"
 #include <iostream>
 
+RedeSocial::RedeSocial() {
+	this->conta_acessada = nullptr;
+};
+
+void RedeSocial::AcessarConta(Conta* conta) {
+	this->conta_acessada = conta;
+}
+
 void RedeSocial::CriarConta(std::string nome_str) {
 	Conta* conta_ = new Conta(nome_str, Contas);
 }

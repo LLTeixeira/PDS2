@@ -2,25 +2,52 @@
 #include "Gerenciador.hpp"
 
 
-Gerenciador::Gerenciador(std::stack<Painel> PilhaPaineis, RedeSocial* rede_social) {
+Gerenciador::Gerenciador(RedeSocial* rede_social) {
     this->PilhaPaineis = PilhaPaineis;
     this->rede_social = rede_social;
 }
 
-void Gerenciador::ConsumirPainel() {
+void Gerenciador::UsarPilha() {
     if (this->PilhaPaineis.empty()) {
         std::cout << "Saindo.." << std::endl;
         exit(0);
     }
 
-    this->PainelAtual = this->PilhaPaineis.top();
-    this->PilhaPaineis.pop();
+    Painel* PainelAtual = this->PilhaPaineis.top();
 
-    this->PainelAtual.exibir(this->rede_social, this->PilhaPaineis);
+    PainelAtual->exibir(this->rede_social);
 
-    this->ConsumirPainel();
+    this->IntepretaIndicador(PainelAtual);
+
+    this->UsarPilha();
+}
+
+void Gerenciador::IntepretaIndicador(Painel* painel) {
+    switch (painel->get_indicador_proximo_painel())
+    {
+    case Indicador::VOLTAR:
+        this->PilhaPaineis.pop();
+        break;
+    
+    case Indicador::NADA:
+        break;
+
+    case Indicador::INICIAL:
+        this->PilhaPaineis.push(&this->pi);
+        break;
+
+    case Indicador::PRINCIPAL:
+        this->PilhaPaineis.push(&this->pp);
+        break;
+
+    default:
+        break;
+    }
 }
 
 void Gerenciador::Iniciar() {
-    ConsumirPainel();
+    this->pi.set_indicador_proximo_painel(Indicador::NADA);
+
+	this->PilhaPaineis.push(&pi);
+    this->UsarPilha();
 }
