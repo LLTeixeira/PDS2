@@ -5,7 +5,7 @@ CXX = g++
 CXXFLAGS = -std=c++11
 
 # Arquivos fonte
-SRCS = RedeSocial.cpp Conta.cpp Comentario.cpp Post.cpp
+SRCS = main.cpp RedeSocial.cpp Conta.cpp Comentario.cpp Post.cpp Gerenciador.cpp Painel.cpp
 
 # Arquivo executável
 TARGET = rede_social.out
