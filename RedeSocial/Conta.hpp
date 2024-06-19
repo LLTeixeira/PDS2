@@ -8,6 +8,7 @@ class Conta {
 		std::string nome;
 		long id;
 		std::vector<Post> Mural;
+		std::vector<Post> mural_seguindo;
 		std::vector<Conta> seguidores;
 		std::vector<Conta> seguindo;
 		std::vector<Post*> posts_notificacoes;
@@ -17,4 +18,6 @@ class Conta {
 		void SeguirConta();
 		void PrintarSeguidores();
 		void PrintarSeguindo();
+		void ObterMuralContasSeguindo();
+		void OrdenarMuralSeguindo();
 };
