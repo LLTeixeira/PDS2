@@ -34,11 +34,19 @@ void Gerenciador::IntepretaIndicador(Painel* painel) {
         break;
 
     case Indicador::PAINEL_INICIAL:
-        this->PilhaPaineis.push(&this->pi);
+        this->PilhaPaineis.push(&this->painel_inicial);
         break;
 
     case Indicador::PAINEL_PRINCIPAL:
-        this->PilhaPaineis.push(&this->pp);
+        this->PilhaPaineis.push(&this->painel_principal);
+        break;
+
+    case Indicador::PAINEL_POST:
+        this->PilhaPaineis.push(&this->painel_post);
+        break;
+
+    case Indicador::PAINEL_NOTIFICACAO:
+        this->PilhaPaineis.push(&this->painel_notificacao);
         break;
 
     default:
@@ -47,8 +55,8 @@ void Gerenciador::IntepretaIndicador(Painel* painel) {
 }
 
 void Gerenciador::Iniciar() {
-    this->pi.set_indicador_proximo_painel(Indicador::MANTER_PAINEL_ATUAL);
+    this->painel_inicial.set_indicador_proximo_painel(Indicador::MANTER_PAINEL_ATUAL);
 
-	this->PilhaPaineis.push(&pi);
+	this->PilhaPaineis.push(&painel_inicial);
     this->UsarPilha();
 }

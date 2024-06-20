@@ -28,6 +28,18 @@ class PainelPrincipal: public Painel {
         void printPainel() override;
 };
 
+class PainelPost: public Painel {
+    public:
+        void exibir(RedeSocial* rede_social) override;
+        void printPainel() override;
+};
+
+class PainelNotificacao: public Painel {
+    public:
+        void exibir(RedeSocial* rede_social) override;
+        void printPainel() override;
+};
+
 enum Indicador {
     VOLTAR = -1,
     MANTER_PAINEL_ATUAL = 0,

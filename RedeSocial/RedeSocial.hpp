@@ -7,10 +7,11 @@
 class RedeSocial {
 	private:
 		std::map <long, Conta*> Contas;
-		Conta* conta_acessada;
-		std::vector<Post> mural_geral;
+		std::vector<Post*> posts_gerais;
 
 	public:
+		Conta* conta_acessada;
+
 		RedeSocial();
 		void CriarConta(std::string nome_str);
 		Conta* GetConta(long id_conta);
@@ -19,6 +20,7 @@ class RedeSocial {
 		void PrintContas();
 		void PrintarPosts(int num_de_posts);
 		Post* FindPost(long dono_id, long id_post);
-		void PreencherMuralGeral();
-		void OrdenarMuralGeral();
+		void SetPostsGerais();
+		void OrdenarPostsGerais();
+		void SetPilhaPostsPraExibir();
 };

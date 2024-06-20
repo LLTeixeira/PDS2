@@ -8,6 +8,8 @@ int main()
 {
 	RedeSocial rede_social = RedeSocial();
 
+	rede_social.CriarConta("admin");
+	rede_social.CriarConta("a");
 	rede_social.CriarConta("Admin");
 
 	Gerenciador gerenciador = Gerenciador(&rede_social);

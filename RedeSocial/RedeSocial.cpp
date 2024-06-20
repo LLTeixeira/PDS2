@@ -1,6 +1,7 @@
 ﻿#include "RedeSocial.hpp"
 #include <iostream>
 #include <algorithm>
+#include "Post.hpp" 
 
 
 RedeSocial::RedeSocial() {
@@ -17,7 +18,8 @@ void RedeSocial::CriarConta(std::string nome_str) {
 
 Conta* RedeSocial::GetConta(long id_conta){
 	if (id_conta > Contas.size() || id_conta <= 0){
-		std::cout << "id_conta " << id_conta << " inexistente!" << std::endl;
+		std::cout << "\n\n";
+		std::cout << "[!] id_conta " << id_conta << " inexistente [!]" << std::endl;
 		return nullptr;
 	}
 
@@ -52,90 +54,90 @@ Post* RedeSocial::FindPost(long dono_id, long id_post) {
 	}
 	else {
 		pConta = Contas[dono_id];
-		if ((*pConta).Mural.size() < id_post) {
+		if ((*pConta).posts_conta.size() < id_post) {
 			std::cout << "Post not found" << std::endl;
 			return nullptr;
 		}
 		else {
-			return &(*pConta).Mural[id_post];
+			return &(*pConta).posts_conta[id_post];
 		}
 	}
 }		
 
 
-void RedeSocial::PreencherMuralGeral(){
+void RedeSocial::SetPostsGerais(){
 	for (auto it = Contas.begin(); it != Contas.end(); ++it) {
-		std::vector<Post> mural_aux = it->second->Mural;
+		std::vector<Post>& posts_aux = it->second->posts_conta;
 
-		this->mural_geral.insert(this->mural_geral.end(), mural_aux.begin(), mural_aux.end());
+		for (int i = 0; i < posts_aux.size(); i++){
+			this->posts_gerais.push_back(&posts_aux[i]);
+		}
 	}
 
-	this->OrdenarMuralGeral();
+	this->OrdenarPostsGerais();
 }
 
 
-void RedeSocial::OrdenarMuralGeral(){
+void RedeSocial::OrdenarPostsGerais(){
 	// Obs.: [](parametros){return ...} é uma função lambda, que definirá o critério de seleção
 	std::sort(
-		mural_geral.begin(), mural_geral.end(), 
-        [](Post& p1, Post& p2) {return p1.GetScore() > p2.GetScore();}
+		posts_gerais.begin(), posts_gerais.end(), 
+        [](Post* p1, Post* p2) {return p1->GetScore() > p2->GetScore();}
 	);
 }
 
-void RedeSocial::PrintarPosts(int num_de_posts){
-	/*
-	Ideia: 
-	1°: Caso não siga ninguém OU as contas que segue não postaram nada, printará os 3 posts mais rankeados do geral
-		-> Caso não tenha posts geral nenhum: printará pra criar o 1° post
-	2°: Caso em que a conta siga alguém que poste algo
-		-> Se (mural_seguindo.size() < num_de_posts): 
-			printará os {mural_seguindo.size()} posts dos seguindo e os {num_de_posts - mural_seguindo.size()} do geral
-		-> Se (mural_seguindo.size() >= num_de_posts):
-			printará os {num_de_posts} posts
-	*/
-	if(this->conta_acessada->seguindo.empty()){
-		if(this->mural_geral.empty()){
-			std::cout << "[!] Sem posts para mostrar! Que tal criar o 1° post da Rede? \n\n";
-		} else {
-			for (int i = 0; i<num_de_posts; i++) {
-				Post p = this->mural_geral[i];
-				std::cout << "-----#-----#-----" << std::endl;
-				std::cout << "| dono:" << Contas[p.dono_id]->nome << "#" << p.dono_id << std::endl;
-				std::cout << "| id_post: " << p.id << std::endl;
-				std::cout << "| conteúdo:" << std::endl;
-				std::cout << p.content << "\n\n";
-				std::cout << "| score: " << p.GetScore() << std::endl;
-				std::cout << "-----#-----#-----" << std::endl;
-			}
-		}
-	} else {
-		this->conta_acessada->ObterMuralContasSeguindo();
-		size_t len_mural_seg = this->conta_acessada->mural_seguindo.size();
-		
-		// Print posts de seguindo
-		for (int i = 0; i<num_de_posts; i++) {
-			Post p = this->conta_acessada->mural_seguindo[i];
-			std::cout << "-----#-----#-----" << std::endl;
-			std::cout << "| dono:" << Contas[p.dono_id]->nome << "#" << p.dono_id << std::endl;
-			std::cout << "| id_post: " << p.id << std::endl;			
-			std::cout << "| conteúdo:" << std::endl;
-			std::cout << p.content << "\n\n";
-			std::cout << "| score: " << p.GetScore() << std::endl;
-			std::cout << "-----#-----#-----" << std::endl;
-		}
+bool checaPostDuplicado(const std::vector<Post>& posts, const Post p) {
+    return std::find(posts.begin(), posts.end(), p) != posts.end();
+}
 
-		// Print posts gerais
-		for (int i = 0; i<(num_de_posts-len_mural_seg); i++) {
-			// TODO: Checar se o mural_geral não é post de algum seguindo, senão repetirá os posts...
-			Post p = this->mural_geral[i];
-			std::cout << "-----#-----#-----" << std::endl;
-			std::cout << "| dono:" << Contas[p.dono_id]->nome << "#" << p.dono_id << std::endl;
-			std::cout << "| id_post: " << p.id << std::endl;
+void RedeSocial::SetPilhaPostsPraExibir(){
+	/*
+	pilha_posts_pra_exibir = [
+		post_seguindo_1, post_seguindo_2, ..., post_geral_rede_social_1, post_geral_rede_social_2, ...
+	]
+	*/
+	conta_acessada->SetPostsContasSeguindo();
+	this->SetPostsGerais();
+
+	// Garantir que a pilha esteja vazia
+	std::stack<Post*> pilha_zerada;
+	this->conta_acessada->pilha_posts_pra_exibir = pilha_zerada;
+    // while (!this->conta_acessada->pilha_posts_pra_exibir.empty()) {
+    //     this->conta_acessada->pilha_posts_pra_exibir.pop();
+    // }
+    for (Post* p : posts_gerais) {
+        if (!checaPostDuplicado(conta_acessada->posts_seguindo, *p)) {
+            this->conta_acessada->pilha_posts_pra_exibir.push(p);
+        }
+    }
+
+    for (Post& post : conta_acessada->posts_seguindo) {
+        this->conta_acessada->pilha_posts_pra_exibir.push(&post);
+    }
+}
+
+
+void RedeSocial::PrintarPosts(int num_de_posts){
+	if(this->conta_acessada->pilha_posts_pra_exibir.empty()){
+		std::cout << "[!] Sem posts para mostrar! Que tal criar o 1° post da Rede? \n\n";
+	} else{
+		int count = 0;
+		while (!conta_acessada->pilha_posts_pra_exibir.empty()) {
+			if (count == num_de_posts) break;
+
+			Post* p = conta_acessada->pilha_posts_pra_exibir.top();
+			std::cout << "------------------" << std::endl;
+			std::cout << "| dono:" << GetConta(p->dono_id)->nome << "#" << p->dono_id << std::endl;
+			std::cout << "| id_post: " << p->id << std::endl;
 			std::cout << "| conteúdo:" << std::endl;
-			std::cout << p.content << "\n\n";
-			std::cout << "| score: " << p.GetScore() << std::endl;
-			std::cout << "-----#-----#-----" << std::endl;
+			std::cout << p->content << "\n\n";
+			std::cout << "| score: " << p->GetScore() << std::endl;
+			std::cout << "------------------" << std::endl;
+			
+			conta_acessada->pilha_posts_vistos.push(p);
+			conta_acessada->pilha_posts_pra_exibir.pop();	
+
+			count++;
 		}
 	}
-	
 }
