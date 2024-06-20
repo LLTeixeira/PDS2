@@ -97,14 +97,13 @@ void RedeSocial::SetPilhaPostsPraExibir(){
 	]
 	*/
 	conta_acessada->SetPostsContasSeguindo();
+	this->ZerarPostsGerais();
 	this->SetPostsGerais();
 
 	// Garantir que a pilha esteja vazia
 	std::stack<Post*> pilha_zerada;
 	this->conta_acessada->pilha_posts_pra_exibir = pilha_zerada;
-    // while (!this->conta_acessada->pilha_posts_pra_exibir.empty()) {
-    //     this->conta_acessada->pilha_posts_pra_exibir.pop();
-    // }
+
     for (Post* p : posts_gerais) {
         if (!checaPostDuplicado(conta_acessada->posts_seguindo, *p)) {
             this->conta_acessada->pilha_posts_pra_exibir.push(p);
@@ -122,9 +121,8 @@ void RedeSocial::PrintarPosts(int num_de_posts){
 		std::cout << "[!] Sem posts para mostrar! Que tal criar o 1° post da Rede? \n\n";
 	} else{
 		int count = 0;
-		while (!conta_acessada->pilha_posts_pra_exibir.empty()) {
-			if (count == num_de_posts) break;
-
+		// std::cout << "\n\nLen pilha_post_exib: " << conta_acessada->pilha_posts_pra_exibir.size() << std::endl;
+		while (!conta_acessada->pilha_posts_pra_exibir.empty() && count < num_de_posts) {
 			Post* p = conta_acessada->pilha_posts_pra_exibir.top();
 			std::cout << "------------------" << std::endl;
 			std::cout << "| dono:" << GetConta(p->dono_id)->nome << "#" << p->dono_id << std::endl;
@@ -140,4 +138,9 @@ void RedeSocial::PrintarPosts(int num_de_posts){
 			count++;
 		}
 	}
+}
+
+void RedeSocial::ZerarPostsGerais(){
+	std::vector<Post*> vetor_zerado;
+	this->posts_gerais = vetor_zerado;
 }

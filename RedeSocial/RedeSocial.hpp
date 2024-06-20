@@ -23,4 +23,5 @@ class RedeSocial {
 		void SetPostsGerais();
 		void OrdenarPostsGerais();
 		void SetPilhaPostsPraExibir();
+		void ZerarPostsGerais();
 };

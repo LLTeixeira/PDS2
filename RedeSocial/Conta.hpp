@@ -25,5 +25,5 @@ class Conta {
 		void SetPostsContasSeguindo();
 		void OrdenarPostsSeguindo();
 		int handlerPostsVistos(int qtd_posts_solicitada);
-
+		void ZerarPilhaPostsVistos();
 };

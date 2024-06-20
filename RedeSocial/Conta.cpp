@@ -54,3 +54,8 @@ int Conta::handlerPostsVistos(int qtd_posts_solicitada) {
 
     return count;
 }
+
+void Conta::ZerarPilhaPostsVistos(){
+	std::stack<Post*> pilha_zerada;
+	this->pilha_posts_vistos = pilha_zerada;
+}
