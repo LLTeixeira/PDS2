@@ -7,9 +7,10 @@ Gerenciador::Gerenciador(RedeSocial* rede_social) {
     this->rede_social = rede_social;
 }
 
+// Função recursiva para usar todas as pilhas
 void Gerenciador::UsarPilha() {
     if (this->PilhaPaineis.empty()) {
-        std::cout << "Saindo.." << std::endl;
+        std::cout << "Fechando a rede social..." << std::endl;
         exit(0);
     }
 
@@ -29,15 +30,23 @@ void Gerenciador::IntepretaIndicador(Painel* painel) {
         this->PilhaPaineis.pop();
         break;
     
-    case Indicador::NADA:
+    case Indicador::MANTER_PAINEL_ATUAL:
         break;
 
-    case Indicador::INICIAL:
-        this->PilhaPaineis.push(&this->pi);
+    case Indicador::PAINEL_INICIAL:
+        this->PilhaPaineis.push(&this->painel_inicial);
         break;
 
-    case Indicador::PRINCIPAL:
-        this->PilhaPaineis.push(&this->pp);
+    case Indicador::PAINEL_PRINCIPAL:
+        this->PilhaPaineis.push(&this->painel_principal);
+        break;
+
+    case Indicador::PAINEL_POST:
+        this->PilhaPaineis.push(&this->painel_post);
+        break;
+
+    case Indicador::PAINEL_NOTIFICACAO:
+        this->PilhaPaineis.push(&this->painel_notificacao);
         break;
 
     default:
@@ -46,8 +55,8 @@ void Gerenciador::IntepretaIndicador(Painel* painel) {
 }
 
 void Gerenciador::Iniciar() {
-    this->pi.set_indicador_proximo_painel(Indicador::NADA);
+    this->painel_inicial.set_indicador_proximo_painel(Indicador::MANTER_PAINEL_ATUAL);
 
-	this->PilhaPaineis.push(&pi);
+	this->PilhaPaineis.push(&painel_inicial);
     this->UsarPilha();
 }

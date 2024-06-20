@@ -8,8 +8,10 @@ class Gerenciador {
 	private:
 		std::stack<Painel*> PilhaPaineis;
 		RedeSocial* rede_social;
-		PainelInicial pi;
-		PainelPrincipal pp;
+		PainelInicial painel_inicial;
+		PainelPrincipal painel_principal;
+		PainelPost painel_post;
+		PainelNotificacao painel_notificacao;
 
 	public:
 		Gerenciador(RedeSocial* rede_social);

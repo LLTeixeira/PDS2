@@ -2,8 +2,8 @@
 #include <numeric>
 #include <iostream>
 
-Post::Post(std::string cont, long id_poster) {
-	content = cont;
+Post::Post(std::string conteudo, long id_poster) {
+	content = conteudo;
 	dono_id = id_poster;
 }
 
@@ -13,7 +13,7 @@ float Post::GetScore() {
 		return soma / avaliacoes.size();
 	}
 	else {
-		std::cout << "No score" << std::endl;
+		// std::cout << "No score" << std::endl;
 		return 0.0;
 	}
 }
