@@ -64,9 +64,7 @@ void PainelPrincipal::exibir(RedeSocial* rede_social) {
                     if (conta != nullptr) {
                         if (std::find(rede_social->conta_acessada->seguindo.begin(), rede_social->conta_acessada->seguindo.end(), conta) != rede_social->conta_acessada->seguindo.end()) {
                             // Parar de seguir a conta
-                            rede_social->conta_acessada->seguindo.erase(std::remove(rede_social->conta_acessada->seguindo.begin(), rede_social->conta_acessada->seguindo.end(), conta), rede_social->conta_acessada->seguindo.end());
-                            conta->seguidores.erase(std::remove(conta->seguidores.begin(), conta->seguidores.end(), rede_social->conta_acessada), conta->seguidores.end());
-                            std::cout << "Você parou de seguir " << nome_conta << "." << std::endl;
+                            rede_social->conta_acessada->PararSeguirConta(conta);
                         } else {
                             // Seguir a conta
                             rede_social->conta_acessada->SeguirConta(conta);

@@ -22,6 +22,7 @@ class Conta {
 		void AvaliarPost(float av, Post& target);
 		void Comentar(std::string com, Post& p);
 		void SeguirConta(Conta* outra_conta);
+		void PararSeguirConta(Conta* outra_conta);
 		void PrintarSeguidores();
 		void PrintarSeguindo();
 		void SetPostsContasSeguindo();
