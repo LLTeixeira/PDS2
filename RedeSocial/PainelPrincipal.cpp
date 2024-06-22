@@ -21,7 +21,7 @@ void PainelPrincipal::printPainel(){
 
 void PainelPrincipal::exibir(RedeSocial* rede_social) {
         int escolha_cod, qtd_posts_solicitada, qtd_posts_exibir;;
-        std::string conteudo_post;
+        std::string conteudo_post, nome_conta;
 
         this->printPainel();
         std::cin >> escolha_cod;
@@ -56,10 +56,32 @@ void PainelPrincipal::exibir(RedeSocial* rede_social) {
                 this->set_indicador_proximo_painel(Indicador::PAINEL_POST);
                 break;
             case 5:
-                // TODO: Seguir / parar de seguir alguma conta
+                // Seguir / parar de seguir alguma conta
+                std::cout << "|> Informe o nome da conta que deseja seguir ou parar de seguir: " << std::endl;
+                std::getline(std::cin >> std::ws, nome_conta);
+                {
+                    Conta* conta = rede_social->GetConta(nome_conta);
+                    if (conta != nullptr) {
+                        if (std::find(rede_social->conta_acessada->seguindo.begin(), rede_social->conta_acessada->seguindo.end(), conta) != rede_social->conta_acessada->seguindo.end()) {
+                            // Parar de seguir a conta
+                            rede_social->conta_acessada->seguindo.erase(std::remove(rede_social->conta_acessada->seguindo.begin(), rede_social->conta_acessada->seguindo.end(), conta), rede_social->conta_acessada->seguindo.end());
+                            conta->seguidores.erase(std::remove(conta->seguidores.begin(), conta->seguidores.end(), rede_social->conta_acessada), conta->seguidores.end());
+                            std::cout << "Você parou de seguir " << nome_conta << "." << std::endl;
+                        } else {
+                            // Seguir a conta
+                            rede_social->conta_acessada->SeguirConta(conta);
+                        }
+                    } else {
+                        std::cout << "Conta " << nome_conta << " não encontrada." << std::endl;
+                    }
+                }
+                this->printPainel();
                 break;
             case 6:
-                // TODO: Mostrar seguindo / seguidores
+                rede_social->conta_acessada->PrintarSeguidores();
+                rede_social->conta_acessada->PrintarSeguindo();
+                this->printPainel(); // Retornar para o painel principal
+            break;
                 break;
             case 7:
                 // TODO: Notificações
