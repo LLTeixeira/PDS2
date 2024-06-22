@@ -1,6 +1,8 @@
 #pragma once
 #include <map>
 #include <stack>
+#include <vector>
+#include <algorithm>
 #include "Post.hpp"
 
 
@@ -13,13 +15,13 @@ class Conta {
 		std::vector<Post> posts_seguindo;
 		std::stack<Post*> pilha_posts_pra_exibir;
 		std::stack<Post*> pilha_posts_vistos;
-		std::vector<Conta> seguidores;
-		std::vector<Conta> seguindo;
+		std::vector<Conta*> seguidores;
+    	std::vector<Conta*> seguindo;
 		std::vector<Post*> posts_notificacoes;
 		void CriarPost(std::string cont);
 		void AvaliarPost(float av, Post& target);
 		void Comentar(std::string com, Post& p);
-		void SeguirConta();
+		void SeguirConta(Conta* outra_conta);
 		void PrintarSeguidores();
 		void PrintarSeguindo();
 		void SetPostsContasSeguindo();
