@@ -1,4 +1,6 @@
 #include "Painel.hpp"
+#include "PainelPost.hpp"
+#include "RedeSocial.hpp"
 #include <string>
 #include <iostream>
 #include <stack>
@@ -20,8 +22,11 @@ void PainelPrincipal::printPainel(){
 }
 
 void PainelPrincipal::exibir(RedeSocial* rede_social) {
-        int escolha_cod, qtd_posts_solicitada, qtd_posts_exibir;;
-        std::string conteudo_post;
+        int escolha_cod, qtd_posts_solicitada, qtd_posts_exibir;
+        long id_dono, id_post;
+        std::string conteudo_post, nome_conta;
+        Post* post;
+        Conta* outra_conta;
 
         this->printPainel();
         std::cin >> escolha_cod;
@@ -52,14 +57,36 @@ void PainelPrincipal::exibir(RedeSocial* rede_social) {
                 rede_social->conta_acessada->ZerarPilhaPostsVistos();
                 break;
             case 4:
-                // TODO: Entrar no Post (ativar e criar o Painel Post)
-                this->set_indicador_proximo_painel(Indicador::PAINEL_POST);
+                std::cout << "|> Informe o ID do dono: " << std::endl;
+                std::cin >> id_dono;
+                std::cout << "|> Informe o ID do post: " << std::endl;
+                std::cin >> id_post;
+                post = rede_social->FindPost(id_dono, id_post);
+                if(post){
+                    rede_social->post_atual = post;
+                    this->set_indicador_proximo_painel(Indicador::PAINEL_POST);
+                }else{
+                    std::cout << "[!] Post não encontrado" << std::endl;
+                }
                 break;
             case 5:
-                // TODO: Seguir / parar de seguir alguma conta
+                std::cout << "|> Informe o nome da conta que deseja seguir ou parar de seguir: " << std::endl;
+                std::getline(std::cin >> std::ws, nome_conta);
+                
+                outra_conta = rede_social->GetConta(nome_conta);
+                if (outra_conta != nullptr) {
+                    if (rede_social->conta_acessada->estaSeguindo(outra_conta)) {                        
+                        rede_social->conta_acessada->pararDeSeguir(outra_conta);
+                    } else {
+                        rede_social->conta_acessada->SeguirConta(outra_conta);
+                    }
+                } else {
+                    std::cout << "Conta " << nome_conta << " não encontrada." << std::endl;
+                }
                 break;
             case 6:
-                // TODO: Mostrar seguindo / seguidores
+                rede_social->conta_acessada->PrintarSeguidores();
+                rede_social->conta_acessada->PrintarSeguindo();
                 break;
             case 7:
                 // TODO: Notificações
