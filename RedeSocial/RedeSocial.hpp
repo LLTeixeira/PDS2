@@ -11,7 +11,7 @@ class RedeSocial {
 
 	public:
 		Conta* conta_acessada;
-
+		Post* post_atual;
 		RedeSocial();
 		void CriarConta(std::string nome_str);
 		Conta* GetConta(long id_conta);

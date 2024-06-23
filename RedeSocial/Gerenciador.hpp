@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RedeSocial.hpp"
+#include "PainelPost.hpp"
 #include "Painel.hpp"
 
 

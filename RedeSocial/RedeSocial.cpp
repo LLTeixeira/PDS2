@@ -6,6 +6,7 @@
 
 RedeSocial::RedeSocial() {
 	this->conta_acessada = nullptr;
+	this->post_atual = nullptr;
 };
 
 void RedeSocial::AcessarConta(Conta* conta) {
@@ -49,13 +50,13 @@ Post* RedeSocial::FindPost(long dono_id, long id_post) {
 	Conta* pConta;
 	auto it = Contas.find(dono_id); 
 	if (it == Contas.end()) {
-		std::cout << "Account not found" << std::endl;
+		std::cout << "[!] Conta não encontrada\n" << std::endl;
 		return nullptr;
 	}
 	else {
 		pConta = Contas[dono_id];
 		if ((*pConta).posts_conta.size() < id_post) {
-			std::cout << "Post not found" << std::endl;
+			std::cout << "[!] Post não encontrado" << std::endl;
 			return nullptr;
 		}
 		else {
@@ -117,8 +118,8 @@ void RedeSocial::SetPilhaPostsPraExibir(){
 
 
 void RedeSocial::PrintarPosts(int num_de_posts){
-	if(this->conta_acessada->pilha_posts_pra_exibir.empty()){
-		std::cout << "[!] Sem posts para mostrar! Que tal criar o 1° post da Rede? \n\n";
+	if(this->conta_acessada->pilha_posts_pra_exibir.empty() || num_de_posts == 0){
+		std::cout << "[!] Sem posts para mostrar...\n\n";
 	} else{
 		int count = 0;
 		// std::cout << "\n\nLen pilha_post_exib: " << conta_acessada->pilha_posts_pra_exibir.size() << std::endl;
