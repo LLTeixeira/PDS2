@@ -79,6 +79,16 @@ void Conta::SeguirConta(Conta* outra_conta) {
     }
 }
 
+void Conta::pararDeSeguir(Conta* outra_conta){
+	if (outra_conta != nullptr && outra_conta != this) {
+        auto it = std::remove(this->seguindo.begin(), this->seguindo.end(), outra_conta);
+		this->seguindo.erase(it, this->seguindo.end());
+		std::cout << "[+] Você deixou de seguir " << outra_conta->nome << "#" << outra_conta->id << std::endl; 
+    } else {
+        std::cout << "[-] Erro ao tentar deixar de seguir a conta!" << std::endl;
+    }
+}
+
 void Conta::PrintarSeguidores() {
     std::cout << "Seguidores de " << this->nome << ":" << std::endl;
     for (Conta* seguidor : this->seguidores) {
@@ -90,15 +100,5 @@ void Conta::PrintarSeguindo() {
     std::cout << "Você, <" << this->nome << ">, está seguindo:" << std::endl;
     for (Conta* seguindo_ : this->seguindo) {
         std::cout << "- " << seguindo_->nome << "#" << seguindo_->id << std::endl;
-    }
-}
-
-void Conta::pararDeSeguir(Conta* outra_conta){
-	if (outra_conta != nullptr && outra_conta != this) {
-        auto it = std::remove(this->seguindo.begin(), this->seguindo.end(), outra_conta);
-		this->seguindo.erase(it, this->seguindo.end());
-		std::cout << "[+] Você deixou de seguir " << outra_conta->nome << "#" << outra_conta->id << std::endl; 
-    } else {
-        std::cout << "[-] Erro ao tentar deixar de seguir a conta!" << std::endl;
     }
 }
