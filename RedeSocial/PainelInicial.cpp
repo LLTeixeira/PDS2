@@ -46,7 +46,7 @@ void PainelInicial::exibir(RedeSocial* rede_social) {
                 rede_social->SetPilhaPostsPraExibir();
                 std::cout << "\n";
                 std::cout << "☷ POSTAGENS\n\n";
-                rede_social->PrintarPosts(3);
+                rede_social->PrintarPosts(1);
                 this->set_indicador_proximo_painel(Indicador::PAINEL_PRINCIPAL);
                 break;
             default:

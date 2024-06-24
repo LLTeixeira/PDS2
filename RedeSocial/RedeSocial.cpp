@@ -145,3 +145,9 @@ void RedeSocial::ZerarPostsGerais(){
 	std::vector<Post*> vetor_zerado;
 	this->posts_gerais = vetor_zerado;
 }
+
+
+std::vector<Post*> RedeSocial::GetNotificacoes() {
+    return this->conta_acessada->posts_notificacoes;
+}
+

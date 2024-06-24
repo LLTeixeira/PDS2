@@ -6,7 +6,7 @@
 #include <stack>
 
 
-void PainelPrincipal::printPainel(){
+void PainelPrincipal::printPainel(int qtd_notificacoes){
     std::cout << "========================" << std::endl;
     std::cout << "| Painel Principal:" << std::endl;
     std::cout << "| [0] Sair" << std::endl;
@@ -16,9 +16,17 @@ void PainelPrincipal::printPainel(){
     std::cout << "| [4] Entrar no post"  << std::endl;
     std::cout << "| [5] Seguir / parar de seguir alguma conta"  << std::endl;
     std::cout << "| [6] Mostrar seguindo / seguidores"  << std::endl;
-    std::cout << "| [7] Notificações  {qtd_notif}"<< std::endl;
+    std::cout << "| [7] Notificações {"<< qtd_notificacoes << "}" << std::endl;
     std::cout << "========================" << std::endl;
     std::cout << "|> Código: ";
+}
+
+int PainelPrincipal::get_qtd_notificacoes(RedeSocial* rede_social){
+    return rede_social->conta_acessada->posts_notificacoes.size();
+}
+
+void PainelPrincipal::printPainel(){
+
 }
 
 void PainelPrincipal::exibir(RedeSocial* rede_social) {
@@ -28,7 +36,7 @@ void PainelPrincipal::exibir(RedeSocial* rede_social) {
         Post* post;
         Conta* outra_conta;
 
-        this->printPainel();
+        this->printPainel(this->get_qtd_notificacoes(rede_social));
         std::cin >> escolha_cod;
         std::cout << "\n\n";
 
@@ -89,7 +97,7 @@ void PainelPrincipal::exibir(RedeSocial* rede_social) {
                 rede_social->conta_acessada->PrintarSeguindo();
                 break;
             case 7:
-                // TODO: Notificações
+                this->set_indicador_proximo_painel(Indicador::PAINEL_NOTIFICACAO);
                 break;
             default:
                 std::cout << "Escolha inválida!" << std::endl;

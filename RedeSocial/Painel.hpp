@@ -8,6 +8,11 @@ class Painel {
     private:
         int indicador_proximo_painel;
 
+    // protected:
+    //     void setIndicadorProximoPainel(int indicador) {
+    //         this->indicador_proximo_painel = indicador;
+    //     }
+
     public:
         virtual void exibir(RedeSocial* rede_social);
         virtual ~Painel() = default;
@@ -26,12 +31,16 @@ class PainelPrincipal: public Painel {
     public:
         void exibir(RedeSocial* rede_social) override;
         void printPainel() override;
+        int get_qtd_notificacoes(RedeSocial* rede_social);
+        void printPainel(int qtd_notificacoes);
 };
+
 
 class PainelNotificacao: public Painel {
     public:
         void exibir(RedeSocial* rede_social) override;
         void printPainel() override;
+        void printPostNotificacao(std::vector<Post*> notificacoes);
 };
 
 enum Indicador {
@@ -41,5 +50,4 @@ enum Indicador {
     PAINEL_PRINCIPAL = 2,
     PAINEL_POST = 3,
     PAINEL_NOTIFICACAO = 4,
-    PAINEL_NOTIFICACAO_POST = 5
 };
