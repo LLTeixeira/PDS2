@@ -17,3 +17,13 @@ float Post::GetScore() {
 		return 0.0;
 	}
 }
+
+void Post::printPostFormatado(){
+	std::cout << "------------------" << std::endl;
+	std::cout << "| id_dono:" << this->dono_id << std::endl;
+	std::cout << "| id_post: " << this->id << std::endl;
+	std::cout << "| conteúdo:" << std::endl;
+	std::cout << this->content << "\n\n";
+	std::cout << "| score: " << this->GetScore() << std::endl;
+	std::cout << "------------------" << std::endl;
+}

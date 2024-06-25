@@ -1,7 +1,4 @@
-﻿// RedeSocial.h : Include file for standard system include files,
-// or project specific include files.
-
-#pragma once
+﻿#pragma once
 #include "Conta.hpp"
 
 class RedeSocial {
@@ -24,4 +21,7 @@ class RedeSocial {
 		void OrdenarPostsGerais();
 		void SetPilhaPostsPraExibir();
 		void ZerarPostsGerais();
+
+		std::vector<Notificacao> GetNotificacoes();
+        void LimparNotificacoes();
 };
