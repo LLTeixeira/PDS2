@@ -14,11 +14,9 @@ void PainelNotificacao::printPainel(){
     std::cout << "|> Código: ";
 }
 
-void PainelNotificacao::printPostNotificacao(std::vector<Post*> notificacoes){
-    for (Post* post : notificacoes){
-        std::cout << "Post ID: " << post->id << " | Dono ID: " << post->dono_id << std::endl;
-        // std::cout << post->content << std::endl;
-        std::cout << "----------------------" << std::endl;
+void PainelNotificacao::printPostNotificacao(RedeSocial* rede_social){
+    for (Notificacao notif : rede_social->conta_acessada->posts_notificacoes){
+        rede_social->FindPost(notif.id_dono, notif.id_post)->printPostFormatado();
         }
 }
 
@@ -29,7 +27,7 @@ void PainelNotificacao::exibir(RedeSocial* rede_social) {
     long id_dono, id_post;
     Post* post;
     
-    this->printPostNotificacao(rede_social->conta_acessada->posts_notificacoes);
+    this->printPostNotificacao(rede_social);
     this->printPainel();
     std::cin >> escolha_cod;
     std::cout << "\n\n";

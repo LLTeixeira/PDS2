@@ -5,6 +5,10 @@
 #include <vector>
 #include "Post.hpp"
 
+struct Notificacao{
+    long id_dono, id_post;
+};
+
 class Conta {
     public:
         Conta(std::string nome, std::map <long, Conta*>& Contas);
@@ -16,7 +20,8 @@ class Conta {
         std::stack<Post*> pilha_posts_vistos;
         std::vector<Conta*> seguidores;
         std::vector<Conta*> seguindo;
-        std::vector<Post*> posts_notificacoes;
+        
+        std::vector<Notificacao> posts_notificacoes;
         void CriarPost(std::string cont);
         void AvaliarPost(float av, Post& target);
         void Comentar(std::string com, Post& p);
@@ -34,6 +39,7 @@ class Conta {
 
 		void AdicionarNotificacao(Post* post);
 		void LimparNotificacoes();
+
 
         bool operator==(const Conta& other) const {
             return id == other.id;

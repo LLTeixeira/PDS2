@@ -22,7 +22,7 @@ void PainelPost::printPainel(){
 
 void PainelPost::exibir(RedeSocial* rede_social){
    int escolha_cod;
-
+    rede_social->post_atual->printPostFormatado();
     this->printPainel();
     std::cin >> escolha_cod;
     std::cin.ignore();

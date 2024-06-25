@@ -19,20 +19,26 @@ Conta::Conta(std::string str_nome, std::map <long, Conta*>& Contas) {
 
 
 void Conta::CriarPost(std::string conteudo) {
-    posts_conta.emplace_back(conteudo, this->id); // Cria o objeto diretamente no vetor
-    Post& new_post = posts_conta.back(); // Referência ao objeto recém-criado
-    new_post.id = posts_conta.size() - 1;
+    Post* new_post = new Post(conteudo, this->id);
+    new_post->id = posts_conta.size();
+    posts_conta.push_back(*new_post);
     std::cout << "[+] Post criado com sucesso!\n\n";
 
-    AdicionarNotificacao(&new_post); // Passa o endereço do objeto válido
+    AdicionarNotificacao(new_post);
+
 }
 
 
 void Conta::AdicionarNotificacao(Post* post) {
+    Notificacao notif;
+    notif.id_dono = post->dono_id;
+    notif.id_post = post->id;
     for (auto conta : this->seguidores){
-        conta->posts_notificacoes.push_back(post);
+        conta->posts_notificacoes.push_back(notif);
     }
 }
+
+
 
 
 void Conta::AvaliarPost(float av, Post& post_target) {

@@ -40,7 +40,7 @@ class PainelNotificacao: public Painel {
     public:
         void exibir(RedeSocial* rede_social) override;
         void printPainel() override;
-        void printPostNotificacao(std::vector<Post*> notificacoes);
+        void printPostNotificacao(RedeSocial* rede_social);
 };
 
 enum Indicador {

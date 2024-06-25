@@ -14,6 +14,7 @@ class Post {
 		std::vector<float> avaliacoes;
 		std::vector<Comentario> comentarios;
 		float GetScore();
+		void printPostFormatado();
 
 		bool operator==(const Post& other) const {
         return id == other.id && dono_id == other.dono_id && content == other.content;

@@ -22,6 +22,6 @@ class RedeSocial {
 		void SetPilhaPostsPraExibir();
 		void ZerarPostsGerais();
 
-		std::vector<Post*> GetNotificacoes();
+		std::vector<Notificacao> GetNotificacoes();
         void LimparNotificacoes();
 };

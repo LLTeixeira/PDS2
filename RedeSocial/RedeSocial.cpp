@@ -125,17 +125,11 @@ void RedeSocial::PrintarPosts(int num_de_posts){
 		// std::cout << "\n\nLen pilha_post_exib: " << conta_acessada->pilha_posts_pra_exibir.size() << std::endl;
 		while (!conta_acessada->pilha_posts_pra_exibir.empty() && count < num_de_posts) {
 			Post* p = conta_acessada->pilha_posts_pra_exibir.top();
-			std::cout << "------------------" << std::endl;
-			std::cout << "| dono:" << GetConta(p->dono_id)->nome << "#" << p->dono_id << std::endl;
-			std::cout << "| id_post: " << p->id << std::endl;
-			std::cout << "| conteúdo:" << std::endl;
-			std::cout << p->content << "\n\n";
-			std::cout << "| score: " << p->GetScore() << std::endl;
-			std::cout << "------------------" << std::endl;
+			p->printPostFormatado();
 			
 			conta_acessada->pilha_posts_vistos.push(p);
 			conta_acessada->pilha_posts_pra_exibir.pop();	
-
+	
 			count++;
 		}
 	}
@@ -147,7 +141,7 @@ void RedeSocial::ZerarPostsGerais(){
 }
 
 
-std::vector<Post*> RedeSocial::GetNotificacoes() {
+std::vector<Notificacao> RedeSocial::GetNotificacoes() {
     return this->conta_acessada->posts_notificacoes;
 }
 
