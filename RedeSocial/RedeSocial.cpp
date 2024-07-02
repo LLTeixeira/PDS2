@@ -145,3 +145,14 @@ std::vector<Notificacao> RedeSocial::GetNotificacoes() {
     return this->conta_acessada->posts_notificacoes;
 }
 
+void RedeSocial::DeletarConta(long id_conta) {
+	Conta* conta = GetConta(id_conta);
+	Contas.erase(id_conta);
+	delete conta;
+}
+
+void RedeSocial::DeletarConta(std::string nome_conta) {
+	Conta* conta = GetConta(nome_conta);
+	Contas.erase(conta->id);
+	delete conta;
+}

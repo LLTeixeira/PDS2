@@ -27,3 +27,6 @@ void Post::printPostFormatado(){
 	std::cout << "| score: " << this->GetScore() << std::endl;
 	std::cout << "------------------" << std::endl;
 }
+
+Post::~Post() {
+};

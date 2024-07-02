@@ -12,3 +12,6 @@ long Comentario::getDonoId() const{
 std::string Comentario::getConteudo() const{
 	return this->conteudo;
 }
+
+Comentario::~Comentario() {
+};

@@ -14,6 +14,8 @@ int main()
 	rede_social.GetConta("a")->SeguirConta(rede_social.GetConta("admin"));
 	rede_social.GetConta("admin")->CriarPost("C++ é um saco");
 	rede_social.GetConta("admin")->CriarPost("Odeio C++");
+	rede_social.DeletarConta("a");
+	rede_social.GetConta("admin")->DeletarPost(1);
 
 	Gerenciador gerenciador = Gerenciador(&rede_social);
 

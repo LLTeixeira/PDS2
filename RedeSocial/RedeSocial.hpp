@@ -21,6 +21,8 @@ class RedeSocial {
 		void OrdenarPostsGerais();
 		void SetPilhaPostsPraExibir();
 		void ZerarPostsGerais();
+		void DeletarConta(long id_conta);
+		void DeletarConta(std::string nome_conta);
 
 		std::vector<Notificacao> GetNotificacoes();
         void LimparNotificacoes();

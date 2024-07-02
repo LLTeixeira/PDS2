@@ -17,6 +17,8 @@ void PainelPrincipal::printPainel(int qtd_notificacoes){
     std::cout << "| [5] Seguir / parar de seguir alguma conta"  << std::endl;
     std::cout << "| [6] Mostrar seguindo / seguidores"  << std::endl;
     std::cout << "| [7] Notificações {"<< qtd_notificacoes << "}" << std::endl;
+    std::cout << "| [8] Deletar conta" << std::endl;
+    std::cout << "| [9] Deletar post" << std::endl;
     std::cout << "========================" << std::endl;
     std::cout << "|> Código: ";
 }
@@ -35,6 +37,7 @@ void PainelPrincipal::exibir(RedeSocial* rede_social) {
         std::string conteudo_post, nome_conta;
         Post* post;
         Conta* outra_conta;
+        std::string conta_a_deletar;
 
         this->printPainel(this->get_qtd_notificacoes(rede_social));
         std::cin >> escolha_cod;
@@ -98,6 +101,28 @@ void PainelPrincipal::exibir(RedeSocial* rede_social) {
                 break;
             case 7:
                 this->set_indicador_proximo_painel(Indicador::PAINEL_NOTIFICACAO);
+                break;
+            case 8:
+                std::cout << "|> Informe o nome da conta: " << std::endl;
+                std::getline(std::cin >> std::ws, conta_a_deletar);
+                if (rede_social->GetConta(conta_a_deletar) == nullptr) {
+                    std::cout << "[!] Conta não encontrada " << std::endl;
+                }
+                else {
+                    rede_social->DeletarConta(conta_a_deletar);
+                    std::cout << "[!] Conta "<< conta_a_deletar << " deletada!" << std::endl;
+                }
+                break;
+            case 9:
+                std::cout << "|> Informe o id do post: " << std::endl;
+                std::cin >> id_post;
+                if (rede_social->conta_acessada->posts_conta.size() >= id_post - 1){
+                    std::cout << "[!] Post não encontrado " << std::endl;
+                }
+                else {
+                    rede_social->conta_acessada->DeletarPost(id_post);
+                    std::cout << "[!] Post deletado!" << std::endl;
+                }
                 break;
             default:
                 std::cout << "Escolha inválida!" << std::endl;
