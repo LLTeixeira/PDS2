@@ -17,7 +17,6 @@ Conta::Conta(std::string str_nome, std::map <long, Conta*>& Contas) {
 //     AdicionarNotificacao(&new_post);
 // }
 
-
 void Conta::CriarPost(std::string conteudo) {
     Post* new_post = new Post(conteudo, this->id);
     new_post->id = posts_conta.size();
@@ -28,7 +27,6 @@ void Conta::CriarPost(std::string conteudo) {
 
 }
 
-
 void Conta::AdicionarNotificacao(Post* post) {
     Notificacao notif;
     notif.id_dono = post->dono_id;
@@ -37,9 +35,6 @@ void Conta::AdicionarNotificacao(Post* post) {
         conta->posts_notificacoes.push_back(notif);
     }
 }
-
-
-
 
 void Conta::AvaliarPost(float av, Post& post_target) {
     post_target.avaliacoes.push_back(av);
@@ -128,7 +123,6 @@ void Conta::printarPostsContasSeguindo(){
         std::cout << "- " << seguindo_->nome << "#" << seguindo_->id << std::endl;
     }
 }
-
 
 void Conta::LimparNotificacoes() {
     this->posts_notificacoes.clear();

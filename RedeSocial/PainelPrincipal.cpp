@@ -18,6 +18,7 @@ void PainelPrincipal::printPainel(int qtd_notificacoes){
     std::cout << "| [6] Mostrar seguindo / seguidores"  << std::endl;
     std::cout << "| [7] Notificações {"<< qtd_notificacoes << "}" << std::endl;
     std::cout << "| [8] Deletar conta" << std::endl;
+    std::cout << "| [9] Deletar post" << std::endl;
     std::cout << "========================" << std::endl;
     std::cout << "|> Código: ";
 }
@@ -110,6 +111,17 @@ void PainelPrincipal::exibir(RedeSocial* rede_social) {
                 else {
                     rede_social->DeletarConta(conta_a_deletar);
                     std::cout << "[!] Conta "<< conta_a_deletar << " deletada!" << std::endl;
+                }
+                break;
+            case 9:
+                std::cout << "|> Informe o id do post: " << std::endl;
+                std::cin >> id_post;
+                if (rede_social->conta_acessada->posts_conta.size() >= id_post - 1){
+                    std::cout << "[!] Post não encontrado " << std::endl;
+                }
+                else {
+                    rede_social->conta_acessada->DeletarPost(id_post);
+                    std::cout << "[!] Post deletado!" << std::endl;
                 }
                 break;
             default:
