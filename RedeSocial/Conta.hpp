@@ -36,10 +36,12 @@ class Conta {
         bool estaSeguindo(Conta* outra_conta);  
         std::string getNome();
 		void printarPostsContasSeguindo();
+        void DeletarPost(long post_id);
 
 		void AdicionarNotificacao(Post* post);
 		void LimparNotificacoes();
 
+        ~Conta();
 
         bool operator==(const Conta& other) const {
             return id == other.id;

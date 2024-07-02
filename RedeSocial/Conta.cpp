@@ -133,3 +133,12 @@ void Conta::printarPostsContasSeguindo(){
 void Conta::LimparNotificacoes() {
     this->posts_notificacoes.clear();
 }
+
+Conta::~Conta() {
+}
+
+void Conta::DeletarPost(long id_post) {
+    this->posts_conta[id_post] = Post("Post deletado", this->id);
+    Post* post = &(this->posts_conta[id_post]);
+    post->id = id_post;
+}
